@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-deployment
+  labels:
+    tier: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: dev
+  template:
+    metadata:
+      labels:
+        tier: dev
+    spec:
+      containers:
+      - name: mysql
+        image: mysql
+        ports:
+        - containerPort: 80
