@@ -1,7 +1,7 @@
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment
 metadata:
-  name: mysql-replicaset
+  name: mysql-deployment
   labels:
     app: mysql
 spec:
@@ -9,6 +9,8 @@ spec:
   selector:
     matchLabels:
       app: mysql
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -25,7 +27,6 @@ spec:
         volumeMounts:
         - name: mysql-data
           mountPath: /var/lib/mysql
-      
       volumes:
       - name: mysql-data
         persistentVolumeClaim:
